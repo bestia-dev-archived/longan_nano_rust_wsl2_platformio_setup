@@ -208,15 +208,15 @@ $ python3 -V
 The new project will be next to our other rust projects:  
 `cd ~/rustprojects/`  
 The magic incantation will create a scaffold for our first project:  
-`$ cargo pio new -b sipeed-longan-nano longan_nano_rust_wsl2_platformio_setup`  
+`$ cargo pio new -b sipeed-longan-nano blinky_blue`  
 First error:  
 Error: Configured board 'sipeed-longan-nano' matches multiple boards in PIO: [sipeed-longan-nano, sipeed-longan-nano]  
 We need a workaround, let's use another board ID:  
-`$ cargo pio new -b gd32vf103c_longan_nano -t riscv32imac-unknown-none-elf longan_nano_rust_wsl2_platformio_setup`  
+`$ cargo pio new -b gd32vf103c_longan_nano -t riscv32imac-unknown-none-elf blinky_blue`  
 ![pio_3.png](images/pio_3.png "pio_3.png")  
 
 Open VSCode in Windows, change it to WSL-Debian mode (left bottom green box), click on New WSL Window, click Open Folder and find  
-`/home/luciano/rustprojects/longan_nano_rust_wsl2_platformio_setup/`  
+`~/rustprojects/blinky_blue/`  
 and click OK.  
 
 We need to change the `[env]` section of platform.ini:
@@ -227,7 +227,7 @@ extra_scripts = pre:platformio.git.py, pre:platformio.patch.py, platformio.cargo
 board = sipeed-longan-nano
 platform = gd32v
 framework = arduino
-rust_lib = longan_nano_rust_wsl2_platformio_setup
+rust_lib = blinky_blue
 rust_target = riscv32imac-unknown-none-elf
 monitor_speed = 115200
 upload_protocol = dfu
@@ -318,11 +318,18 @@ Congratulations !
 You were very patient if you come to this line. The setup of the environment is not super smooth, but once you got it, it's done. You don't have to repeat it every time.  
 And now  leave you to your fantasy so you can code some magnificent rust programs for Longan Nano.  
 
-## git and GitHub CLI
+## git and GitHub
 
 Just to finish in beauty: we will create a remote repository in Github and push our project.  
 I tried the `GitHub CLI`, but it looks awful. I will not use it.  
+I think VSCode already installs git, so you don't have to worry about it.  
 You need to have already a [GitHub](https://github.com/) account and your SSH key for GitHub [prepared](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [added](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to GitHub.  
+I then use ssh-agent to have my GitHub authorization in the background for this terminal session:  
+`$ /usr/bin/ssh-agent`  
+Add my github SSH key to the agent:  
+`$ ssh-add ~/.ssh/lucianobestia_mac`  
+Type your passphrase to authenticate that this is really you.  
+
 Your `.gitignore` file in your project should look like:
 
 ```gitignore
@@ -332,7 +339,7 @@ target/
 
 Open in your browser <github.com>, login and there will be a big green `New` button. Click on it:  
 
-- `Repository name:` longan_nano_rust_wsl2_platformio_setup
+- `Repository name:` blinky_blue
 - `Description:` How to setup a development environment for rust in Win10 + WSL2 + VSCode for Longan nano GD32 Risc-V development board  
 - `Public`
 - uncheck `Add README file`
@@ -344,13 +351,7 @@ The remote repository is created and instructions are shown:
 
 ![github_1](images/github_1.png "github_1")  
 
-Open the Debian bash terminal inside VSCode (Ctrl+j). We will use slightly different commands.  
+Open the Debian bash terminal inside VSCode (Ctrl+j) and paste the commands.  
+Now that the git and GitHub repositories are set, you can use VSCode icons (1) to commit (2+3) and push (4) to remote:  
+![git_vscode_1.png](images/git_vscode_1.png "git_vscode_1.png")  
 
-```bash
-git init
-git add .
-git commit -m "init"
-git branch -M main
-git remote add origin {paste the copied SSH address here}
-git push -u origin main
-```
