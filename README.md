@@ -13,19 +13,19 @@ I always wanted to play with a [Risc-V](https://riscv.org/about/) micro-processo
 
 ## Rust on WSL
 
-Usually the microcontroller is programmed in C, but I am a fan of Rust and want to try it.  
-I use [VSCode](https://code.visualstudio.com/) in [Win10](), but all [rust](https://www.rust-lang.org/) coding and building happens inside [WSL2](https://www.sitepoint.com/wsl2/) in [Debian](https://www.debian.org/).  
+Usually the microcontroller is programmed in C, but I am a fan of the [rust](https://www.rust-lang.org/) programming language and want to try it.  
+I use [VSCode](https://code.visualstudio.com/) in [Win10](), but all [rust](https://www.rust-lang.org/) coding and building happens inside [WSL2](https://www.sitepoint.com/wsl2/) in [Debian Linux](https://www.debian.org/).  
 This combination works very well for building [CLI](https://en.wikipedia.org/wiki/Command-line_interface) and [Wasm](https://en.wikipedia.org/wiki/WebAssembly) applications in Rust.  
 VSCode has a plugin [Remote - WSL extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) that installs a "vscode server" in Debian. Then the VSCode Win10 [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface) frontend talks to the "remote" Debian WSL2 backend for all files and operations. All the files and development tools are in Debian. Only the GUI is in Windows.  
 
 Short instructions:  
 Install [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10) and inside it the [Debian Linux distro](https://www.debian.org/).  
-In Debian we need rust (rust programming language). Use [rustup.exe](https://www.rust-lang.org/learn/get-started) to install it, find it on their [official page](https://www.rust-lang.org/).  Something like this:  
+In Debian we need rust (rust programming language). Use [rustup](https://www.rust-lang.org/learn/get-started) to install it, find it on their [official page](https://www.rust-lang.org/).  Something like this:  
 `$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`  
 
 Install [VSCode](https://code.visualstudio.com/) in Win10.  
 Then in VSCode install the [Remote - WSL extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl).  
-I like this "local plugin" (in Win10) for VSCode:  
+I like to have this "local plugin" (in Win10) for VSCode:  
 
 - [vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
 
@@ -54,7 +54,7 @@ Now the USB is used only for power. This is the "normal mode". Windows does not 
 If you press and hold the `BOOT0` (right) button and then press shortly the `RESET` (left) button and then release the `BOOT0` button, you will put the Longan Nano in "[DFU mode](http://wiki.openmoko.org/wiki/USB_DFU_-_The_USB_Device_Firmware_Upgrade_standard
 )". Now the Longan nano is communicating with the computer over usb. This special mode is used to upgrade the firmware and it is a official USB standard. You will need to do this every time you want to upgrade the firmware and that is super often in development. Get comfortable with these super tiny buttons ;-)  
 
-In the moment Longan Nano enters the "DFU mode" Win10 will recognize a new USB device and usually make a sound. Open the Device Manager: click on Start and type manag, this will show it in the results and then click on it. Or just type `devmgmt.msc` in the command prompt.  
+In the moment Longan Nano enters the "DFU mode" Win10 will recognize a new USB device and usually make a sound. Open the Device Manager: click on Start and type *manag*, this will show the Device Manager in the results and then click on it. Or just type `devmgmt.msc` in the command prompt or PowerShell.  
 ![device manager 1](images/device_manager_1.png "device_manager_1")  
 If the Device Manager is already opened, in the moment you activate the "dfu mode" on the board, Device Manager will refresh to show the new usb device. Leave the Device manager open, we will need it a lot the first time to setup the thing.  
 ![device manager 2](images/device_manager_2.png "device_manager_2")  
@@ -65,10 +65,10 @@ and click on `GD32_MCU_Dfu_Tool_V3.8.1.5784_1.rar` to download the 10MB drivers.
 Unzip the folders：GD32 MCU Dfu Drivers_v1.0.1.2316  
 Right click on `GD32 MCU Dfu Drivers_v1.0.1.2316\x64\GD32 MCU Dfu Drivers.exe` and run as administrator.  
 ![driver_install_1](images/driver_install_1.png "driver_install_1")  
-Click on Install and after successful installation click Cancel to close the window. Strange choice of words "Cancel", it should be "Close". Also in their online instructions is really visible that the main effort was in Chinese and not in the English language. Some translations are pretty bad.  
+Click on Install and after successful installation click Cancel to close the window. Strange choice of words "Cancel", it should be "Close". Also in their [online instructions](https://longan.sipeed.com/en/) is really visible that the main effort was in Chinese and not in the English language. Some translations are pretty bad.  
 Now in Device Manager at the bottom in the section "Universal Serial Bus controllers" we see the new driver.  
 ![device manager 3](images/device_manager_3.png "device_manager_3")  
-This would be enough if we wanted to use the application from Sipeed: `GD32 MCU Dfu Tool_v3.8.1.5784\GD32 MCU Dfu Tool.exe`. But we don't want to do that. It is windows GUI application, and we want to use a CLI application that can be a part of our workflow for building and downloading to the Longan Nano.  
+This would be enough if we wanted to use the application from Sipeed: `GD32 MCU Dfu Tool_v3.8.1.5784\GD32 MCU Dfu Tool.exe`. But we don't want to do that. It is a windows GUI application, and we want to use a CLI application that can be a part of our workflow for building and downloading to the Longan Nano.  
 `Interesting:` the word "download" is used to send the firmware from the computer to the board and the word "upload" is used to send the firmware from the board to the computer. For me it sounds confusing, but this is the professional lingo!  
 
 ## dfu-util and Zadig
@@ -76,8 +76,9 @@ This would be enough if we wanted to use the application from Sipeed: `GD32 MCU 
 We want to use the CLI application [dfu-utils](http://dfu-util.sourceforge.net/).  
 There are a few problems there and we need to find some workarounds, so bear with me and be extra attentive.  
 
-The best use of dfu-util would be from Linux, but as I said earlier we have no luck, because WSL2 does not use native USB.  
-There exists also the release of `dfu-util for Windows`, but it does not work with the GD32 driver. But I have you covered. Here is the workarounds:  
+The best use of `dfu-util` is from `Linux`, but as I said earlier we have no luck, because `WSL2` does not use native USB.  
+There exists also the release `dfu-util for Windows 0.9`, but it has a bug and does not work with the GD32 driver.  
+I have you covered. Here is the workaround:  
 
 We need a special type of driver called [WinUSB](https://en.wikipedia.org/wiki/WinUSB). We will use the application [Zadig](https://zadig.akeo.ie/) to replace our GD32 driver with the WinUSB driver. Open the page <https://zadig.akeo.ie/> and click on `Zadig 2.5 (4.9 MB)` to download it.  
 Put your Longan Nona in "dfu mode". You know: BOOT0 and RESET buttons. 
