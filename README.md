@@ -90,7 +90,7 @@ When you open the DropDown there is bunch of existing usb drivers.
 Interesingly, there is one driver without a name. I don't know why, but this is our GD32 driver. Click on it.  
 I want to give this driver a name. Click on the checkbox Edit,  
 ![zadig_3](images/zadig_3.png "zadig_3")  
-write the driver name WinUSB Longan Nano  
+write the driver name "WinUSB Longan Nano"  
 ![zadig_4](images/zadig_4.png "zadig_4")  
 and click again on the Edit checkbox.   
 ![zadig_5](images/zadig_5.png "zadig_5")  
@@ -105,12 +105,12 @@ Done! Close it.
 
 Open Device Manager and put the Nano in "dfu mode" again. The new situation has a new "Universal Serial Bus devices", but sadly it is called Unknown device.  
 ![device manager 4](images/device_manager_4.png "device_manager_4")  
-Double click on it and choose the tab Details and you will see that it is really our new driver.  
+Double click on it and choose the tab Details and you will see that it is really our new driver "WinUSB Longan Nano".  
 ![device manager 5](images/device_manager_5.png "device_manager_5")  
 
 The dfu-util for Windows you can download on the internet is version 0.9. Sadly it has a bug and it does not work for GD32V. But I have a workaround. The people from PlatformIO have built the version 0.10 for Windows, but it is not available on the internet to download. But we get it when we install PlatformIO on VSCode on Windows. I did that. I found the `tool-dfuutil\bin` folder in `c:\Users\Luciano\.platformio\packages\tool-dfuutil\bin`.  
-Here you can download the bin folder:  
-TODO: Github download tool-dfuutil\bin.zip
+Here you can download the bin folder here:  
+<https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/tool-dfuutil/bin.zip>
 
 Now we can empty the `tool-dfuutil/bin` folder on WSL2, because it will never work in Linux in WSL2.  
 If you use a windows tool (I use Total Commander) it is: `\\wsl$\Debian\home\luciano\.platformio\packages\tool-dfuutil\bin\`.  
