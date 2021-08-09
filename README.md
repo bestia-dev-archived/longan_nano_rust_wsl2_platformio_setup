@@ -344,3 +344,12 @@ The remote repository is created and instructions are shown:
 Open the Debian bash terminal inside VSCode (Ctrl+j) and paste the commands.  
 Now that the git and GitHub repositories are set, you can use VSCode icons (1) to commit (2+3) and push (4) to remote:  
 ![git_vscode_1.png](images/git_vscode_1.png "git_vscode_1.png")  
+
+You can find my repository here:
+<https://github.com/LucianoBestia/blinky_blue>  
+and clone it locally like this:  
+
+```bash
+cd ~/rustprojects
+git clone git@github.com:LucianoBestia/blinky_blue.git
+```
