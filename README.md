@@ -7,14 +7,14 @@ How to setup a development environment for rust in Win10 + WSL2 + VSCode for Lon
 ## Sipeed Longan nano
 
 I just received my 2 [Sipeed Longan nano](http://longan.sipeed.com/en/) development boards ordered on [AliExpress](https://www.aliexpress.com/item/4000505297604.html?spm=a2g0s.9042311.0.0.6b4b4c4dYrInFR). They are cute and cheap. One has even a tiny lcd display.  
-The Risc-V chip on the board is GD32VF103CBT6 or in short [GD32V](https://www.gigadevice.com/products/microcontrollers/gd32/) from GigeDevice.
+The Risc-V chip on the board is GD32VF103CBT6 or in short [GD32V](https://www.gigadevice.com/products/microcontrollers/gd32/) from GigaDevice.
 ![Longan nano](images/longan_nano_1.png "Longan nano")  
 I always wanted to play with a [Risc-V](https://riscv.org/about/) micro-processor. I think they are the future. I believe they will grow and will be used in phones, laptops and servers, not only in microcontrollers. But I hope designers will find a way to avoid [malware](https://en.wikipedia.org/wiki/Malware) inside the silicon. That would be a ruined future.  
 
 ## Rust on WSL
 
 Usually the microcontroller is programmed in C, but I am a fan of the [rust](https://www.rust-lang.org/) programming language and want to try it.  
-I use [VSCode](https://code.visualstudio.com/) in [Win10](), but all [rust](https://www.rust-lang.org/) coding and building happens inside [WSL2](https://www.sitepoint.com/wsl2/) in [Debian Linux](https://www.debian.org/).  
+I use [VSCode](https://code.visualstudio.com/) in [Win10](https://www.microsoft.com/sl-si/software-download/windows10), but all [rust](https://www.rust-lang.org/) coding and building happens inside [WSL2](https://www.sitepoint.com/wsl2/) in [Debian Linux](https://www.debian.org/).  
 This combination works very well for building [CLI](https://en.wikipedia.org/wiki/Command-line_interface) and [Wasm](https://en.wikipedia.org/wiki/WebAssembly) applications in Rust.  
 VSCode has a plugin [Remote - WSL extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) that installs a "vscode server" in Debian. Then the VSCode Win10 [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface) frontend talks to the "remote" Debian WSL2 backend for all files and operations. All the files and development tools are in Debian. Only the GUI is in Windows.  
 
@@ -54,7 +54,7 @@ Now the USB is used only for power. This is the "normal mode". Windows does not 
 If you press and hold the `BOOT0` (right) button and then press shortly the `RESET` (left) button and then release the `BOOT0` button, you will put the Longan Nano in "[DFU mode](http://wiki.openmoko.org/wiki/USB_DFU_-_The_USB_Device_Firmware_Upgrade_standard
 )". Now the Longan nano is communicating with the computer over usb. This special mode is used to upgrade the firmware and it is a official USB standard. You will need to do this every time you want to upgrade the firmware and that is super often in development. Get comfortable with these super tiny buttons ;-)  
 
-In the moment Longan Nano enters the "DFU mode" Win10 will recognize a new USB device and usually make a sound. Open the Device Manager: click on Start and type *manag*, this will show the Device Manager in the results and then click on it. Or just type `devmgmt.msc` in the command prompt or PowerShell.  
+In the moment Longan Nano enters the "DFU mode" Win10 will recognize a new USB device and usually make a sound. Open the Device Manager: click on Start and type *manage*, this will show the Device Manager in the results and then click on it. Or just type `devmgmt.msc` in the command prompt or PowerShell.  
 ![device manager 1](images/device_manager_1.png "device_manager_1")  
 If the Device Manager is already opened, in the moment you activate the "dfu mode" on the board, Device Manager will refresh to show the new usb device. Leave the Device manager open, we will need it a lot the first time to setup the thing.  
 ![device manager 2](images/device_manager_2.png "device_manager_2")  
@@ -81,18 +81,18 @@ There exists also the release `dfu-util for Windows 0.9`, but it has a bug and d
 I have you covered. Here is the workaround:  
 
 We need a special type of driver called [WinUSB](https://en.wikipedia.org/wiki/WinUSB). We will use the application [Zadig](https://zadig.akeo.ie/) to replace our GD32 driver with the WinUSB driver. Open the page <https://zadig.akeo.ie/> and click on `Zadig 2.5 (4.9 MB)` to download it.  
-Put your Longan Nona in "dfu mode". You know: BOOT0 and RESET buttons. 
+Put your Longan Nona in "dfu mode". You know: BOOT0 and RESET buttons.  
 Double click on `zadig-2.5.exe` to run it. You will be asked `Do you want to allow this app to make changes to your device?` and choose Yes. It is a driver, it must change something.  
 From the menu choose Options - List All Devices.  
 ![zadig_1](images/zadig_1.png "zadig_1")  
 When you open the DropDown there is bunch of existing usb drivers.  
 ![zadig_2](images/zadig_2.png "zadig_2")  
-Interesingly, there is one driver without a name. I don't know why, but this is our GD32 driver. Click on it.  
+Interestingly, there is one driver without a name. I don't know why, but this is our GD32 driver. Click on it.  
 I want to give this driver a name. Click on the checkbox Edit,  
 ![zadig_3](images/zadig_3.png "zadig_3")  
 write the driver name "WinUSB Longan Nano"  
 ![zadig_4](images/zadig_4.png "zadig_4")  
-and click again on the Edit checkbox.   
+and click again on the Edit checkbox.  
 ![zadig_5](images/zadig_5.png "zadig_5")  
 Now the driver has a name. I hope.  
 And now the magic part. Click on `Replace Driver`.  
@@ -144,7 +144,7 @@ Et voilà ! There we are !
 ## Original Blinky example in C
 
 Let's try our environment now.  
-Open VSCode. Normaly it opens in Windows Mode. You can tell by the green box in the left bottom corner. This is how it looks for Windows mode:  
+Open VSCode. Normally it opens in Windows Mode. You can tell by the green box in the left bottom corner. This is how it looks for Windows mode:  
 ![vscode_1.png](images/vscode_1.png "vscode_1.png")  
 and this is how it looks in WSL-Debian mode:  
 ![vscode_2.png](images/vscode_2.png "vscode_2.png")  
@@ -202,23 +202,15 @@ We will need also a target for the Risc-V processor (in Debian):
 PlatformIO needs Python 3. Debian comes preinstalled with it. Upgrade to the latest version in Debian packages (Debian is always a little behind):  
 
 ```bash
-$ sudo apt update
-$ sudo apt -y upgrade
-$ python3 -V
+sudo apt update
+sudo apt -y upgrade
+python3 -V
 ```
 
 The new project will be next to our other rust projects:  
 `$ cd ~/rustprojects/`  
 The magic incantation will create a scaffold for our first project:  
-`$ cargo pio new -b sipeed-longan-nano blinky_blue`  
-And we are surprised with an error:  
-
-```error
-Error: Configured board 'sipeed-longan-nano' matches multiple boards in PIO: [sipeed-longan-nano, sipeed-longan-nano]  
-```
-
-We need a workaround, let's use another board ID:  
-`$ cargo pio new -b gd32vf103c_longan_nano -t riscv32imac-unknown-none-elf blinky_blue`  
+`$  cargo pio new -b sipeed-longan-nano -p gd32v blinky_blue`  
 ![pio_3.png](images/pio_3.png "pio_3.png")  
 
 Open VSCode in Windows, change it to WSL-Debian mode (left bottom green box), click on New WSL Window, click Open Folder and find  
@@ -234,7 +226,7 @@ We need to change the `[env]` section of platform.ini:
 extra_scripts = pre:platformio.git.py, pre:platformio.patch.py, platformio.cargo.py
 board = sipeed-longan-nano
 platform = gd32v
-framework = arduino
+framework = gd32vf103-sdk
 rust_lib = blinky_blue
 rust_target = riscv32imac-unknown-none-elf
 monitor_speed = 115200
@@ -259,29 +251,25 @@ edition = "2018"
 ```
 
 In .gitignore we add the `target/` folder next to the `.pio`:  
-```
+
+```ini
 .pio/
 target/
 ```
 
 Finally we come to coding in rust.  
-In `src/lib.rs` we remove the `ESP-IDF` and `All others` sections. The remaining `Arduino` section should look like this:  
+In `src/lib.rs` we remove the `ESP-IDF` and `All others` sections. The remaining `All others` section should look like this:  
 
 ```rust
 ////////////////////////////////////////////////////////
-// Arduino                                            //
+// All others                                         //
 ////////////////////////////////////////////////////////
 
 use longan_nano::hal::{pac, prelude::*};
 use longan_nano::led::{Led, rgb};
 
 #[no_mangle]
-extern "C" fn setup() {
-}
-
-#[no_mangle]
-#[export_name = "loop"]
-extern "C" fn arduino_loop() {
+extern "C" fn main() -> i32 {
     let dp = pac::Peripherals::take().unwrap();
     let mut rcu = dp.RCU.configure().sysclk(108.mhz()).freeze();
 
@@ -311,20 +299,21 @@ extern "C" fn arduino_loop() {
             i += 1;
         }
     }
+    0
 }
 ```
 
 Good.  
 Now we can click on `PlatformIO: Build` button in the status bar.  
 ![build_1.png](images/build_1.png "build_1.png")  
-And we have a succesful build.  
+And we have a successful build.  
 
 Put the Longan Nano in `DFU mode` (BOOT0 and RESET mini-buttons) and click on `PlatformIO: Upload` button on the statusbar.  
 ![build_2.png](images/build_2.png "build_2.png")  
 It works! The Nano has a blinking blue LED !  
 Congratulations !
 You were very patient if you come to this line. The setup of the environment is not super smooth, but once you got it, it's done. You don't have to repeat it every time.  
-And now  leave you to your fantasy so you can code some magnificent rust programs for Longan Nano.  
+And now I leave you to your fantasy, so you can code some magnificent rust programs for Longan Nano.  
 
 ## git and GitHub
 
@@ -332,27 +321,20 @@ Just to finish in beauty: we will create a remote repository in Github and push 
 I tried the `GitHub CLI`, but it looks awful. I will not use it.  
 I think VSCode already installs git, so you don't have to worry about it.  
 You need to have already a [GitHub](https://github.com/) account and your SSH key for GitHub [prepared](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [added](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to GitHub.  
-I then use ssh-agent to have my GitHub authorization in the background for this terminal session:  
+In the VSCode terminal (Ctrl+j) I use ssh-agent to have the GitHub authorization in the background only for this terminal session:  
 `$ /usr/bin/ssh-agent`  
-Add my github SSH key to the agent:  
+I add my github SSH key to the agent:  
 `$ ssh-add ~/.ssh/lucianobestia_mac`  
-Type your passphrase to authenticate that this is really you.  
+I type my passphrase to authenticate that this is really me.  
 
-Your `.gitignore` file in your project should look like:
-
-```gitignore
-.pio
-target/
-```
-
-Open in your browser <github.com>, login and there will be a big green `New` button. Click on it:  
+Open in your browser <https://github.com>, login and there will be a big green `New` button. Click on it:  
 
 - `Repository name:` blinky_blue
-- `Description:` How to setup a development environment for rust in Win10 + WSL2 + VSCode for Longan nano GD32 Risc-V development board  
-- `Public`
-- uncheck `Add README file`
-- uncheck `Add .gitignore`
-- uncheck: `Choose a license`
+- `Description:` minimal rust program for Longan Nano
+- click `Public` if needed
+- uncheck (if needed): `Add README file`
+- uncheck (if needed): `Add .gitignore`
+- uncheck (if needed): `Choose a license`
 - `Create repository`
 
 The remote repository is created and instructions are shown:
@@ -362,4 +344,3 @@ The remote repository is created and instructions are shown:
 Open the Debian bash terminal inside VSCode (Ctrl+j) and paste the commands.  
 Now that the git and GitHub repositories are set, you can use VSCode icons (1) to commit (2+3) and push (4) to remote:  
 ![git_vscode_1.png](images/git_vscode_1.png "git_vscode_1.png")  
-
