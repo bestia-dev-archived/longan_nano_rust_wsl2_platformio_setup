@@ -13,7 +13,7 @@ I always wanted to play with a [Risc-V](https://riscv.org/about/) micro-processo
 
 ## Rust on WSL
 
-Usually the microcontroller is programmed in C, but I am a fan of the [rust](https://www.rust-lang.org/) programming language and want to try it.  
+Usually the microcontroller is programmed in C, but I am a fan of the [rust](https://www.rust-lang.org/) programming language and want to try it with Longan Nano.  
 I use [VSCode](https://code.visualstudio.com/) in [Win10](https://www.microsoft.com/sl-si/software-download/windows10), but all [rust](https://www.rust-lang.org/) coding and building happens inside [WSL2](https://www.sitepoint.com/wsl2/) in [Debian Linux](https://www.debian.org/).  
 This combination works very well for building [CLI](https://en.wikipedia.org/wiki/Command-line_interface) and [Wasm](https://en.wikipedia.org/wiki/WebAssembly) applications in Rust.  
 VSCode has a plugin [Remote - WSL extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) that installs a "vscode server" in Debian. Then the VSCode Win10 [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface) frontend talks to the "remote" Debian WSL2 backend for all files and operations. All the files and development tools are in Debian. Only the GUI is in Windows.  
@@ -59,7 +59,7 @@ In the moment Longan Nano enters the "DFU mode" Win10 will recognize a new USB d
 If the Device Manager is already opened, in the moment you activate the "dfu mode" on the board, Device Manager will refresh to show the new usb device. Leave the Device manager open, we will need it a lot the first time to setup the thing.  
 ![device manager 2](images/device_manager_2.png "device_manager_2")  
 We can see a new "Unknown device" when the Nano is in "DFU mode". That is not good enough. We need a driver.  
-First we will install the original driver from sipeed. Open the page  
+First we will install the original driver from Sipeed. Open the page  
 <http://dl.sipeed.com/LONGAN/Nano/Tools>  
 and click on `GD32_MCU_Dfu_Tool_V3.8.1.5784_1.rar` to download the 10MB drivers. Don't miss the captcha or `you are a robot` ;-)  
 Unzip the folders：GD32 MCU Dfu Drivers_v1.0.1.2316  
@@ -209,7 +209,7 @@ python3 -V
 
 The new project will be next to our other rust projects:  
 `$ cd ~/rustprojects/`  
-The magic incantation will create a scaffold for our first project:  
+The magic incantation will create a scaffold for our first project `blinky_blue`:  
 `$  cargo pio new -b sipeed-longan-nano -p gd32v blinky_blue`  
 ![pio_3.png](images/pio_3.png "pio_3.png")  
 
@@ -241,7 +241,8 @@ riscv-rt = "0.8.0"
 longan-nano = "0.2.0"
 ```
 
-and most important we have to change the edition in  `[lib]` section from 2015 to 2018 else you get the cryptic error "error[E0433]: failed to resolve: maybe a missing crate longan_nano?":  
+and most important we have to change the edition in  `[lib]` section from 2015 to 2018 else you get the cryptic error  
+`error[E0433]: failed to resolve: maybe a missing crate longan_nano?`:  
 
 ```toml
 [lib]
@@ -258,7 +259,7 @@ target/
 ```
 
 Finally we come to coding in rust.  
-In `src/lib.rs` we remove the `ESP-IDF` and `All others` sections. The remaining `All others` section should look like this:  
+In `src/lib.rs` we remove the `ESP-IDF` and `Arduino` sections. The remaining `All others` section should look like this:  
 
 ```rust
 ////////////////////////////////////////////////////////
@@ -312,8 +313,8 @@ Put the Longan Nano in `DFU mode` (BOOT0 and RESET mini-buttons) and click on `P
 ![build_2.png](images/build_2.png "build_2.png")  
 It works! The Nano has a blinking blue LED !  
 Congratulations !
-You were very patient if you come to this line. The setup of the environment is not super smooth, but once you got it, it's done. You don't have to repeat it every time.  
-And now I leave you to your fantasy, so you can code some magnificent rust programs for Longan Nano.  
+You were very patient if you come to this line. The setup of the environment is not super smooth, but once you got it, it's done. You don't have to repeat it.  
+And now I leave you to your fantasy, so you can code some great rust programs for Longan Nano.  
 
 ## git and GitHub
 
@@ -321,7 +322,7 @@ Just to finish in beauty: we will create a remote repository in Github and push 
 I tried the `GitHub CLI`, but it looks awful. I will not use it.  
 I think VSCode already installs git, so you don't have to worry about it.  
 You need to have already a [GitHub](https://github.com/) account and your SSH key for GitHub [prepared](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [added](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to GitHub.  
-In the VSCode terminal (Ctrl+j) I use ssh-agent to have the GitHub authorization in the background only for this terminal session:  
+In the VSCode terminal (Ctrl+j) I use ssh-agent to have the GitHub authorization in the background exclusively for this terminal session:  
 `$ /usr/bin/ssh-agent`  
 I add my github SSH key to the agent:  
 `$ ssh-add ~/.ssh/lucianobestia_mac`  
@@ -341,7 +342,7 @@ The remote repository is created and instructions are shown:
 
 ![github_1](images/github_1.png "github_1")  
 
-Open the Debian bash terminal inside VSCode (Ctrl+j) and paste the commands.  
+Click on the button to copy the commands. Open the Debian bash terminal inside VSCode (Ctrl+j) and paste the commands.  
 Now that the git and GitHub repositories are set, you can use VSCode icons (1) to commit (2+3) and push (4) to remote:  
 ![git_vscode_1.png](images/git_vscode_1.png "git_vscode_1.png")  
 
