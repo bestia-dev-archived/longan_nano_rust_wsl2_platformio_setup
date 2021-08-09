@@ -318,7 +318,39 @@ Congratulations !
 You were very patient if you come to this line. The setup of the environment is not super smooth, but once you got it, it's done. You don't have to repeat it every time.  
 And now  leave you to your fantasy so you can code some magnificent rust programs for Longan Nano.  
 
-## git
+## git and GitHub CLI
 
-Just to finish in beauty: open the terminal in VSCode (Ctrl+j) and create a git repository:  
-`$ git init -b main`  
+Just to finish in beauty: we will create a remote repository in Github and push our project.  
+I tried the `GitHub CLI`, but it looks awful. I will not use it.  
+You need to have already a [GitHub](https://github.com/) account and your SSH key for GitHub [prepared](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [added](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to GitHub.  
+Your `.gitignore` file in your project should look like:
+
+```gitignore
+.pio
+target/
+```
+
+Open in your browser <github.com>, login and there will be a big green `New` button. Click on it:  
+
+- `Repository name:` longan_nano_rust_wsl2_platformio_setup
+- `Description:` How to setup a development environment for rust in Win10 + WSL2 + VSCode for Longan nano GD32 Risc-V development board  
+- `Public`
+- uncheck `Add README file`
+- uncheck `Add .gitignore`
+- uncheck: `Choose a license`
+- `Create repository`
+
+The remote repository is created and instructions are shown:
+
+![github_1](images/github_1.png "github_1")  
+
+Open the Debian bash terminal inside VSCode (Ctrl+j). We will use slightly different commands.  
+
+```bash
+git init
+git add .
+git commit -m "init"
+git branch -M main
+git remote add origin {paste the copied SSH address here}
+git push -u origin main
+```
