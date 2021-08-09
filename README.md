@@ -109,12 +109,13 @@ Double click on it and choose the tab Details and you will see that it is really
 ![device manager 5](images/device_manager_5.png "device_manager_5")  
 
 The dfu-util for Windows you can download on the internet is version 0.9. Sadly it has a bug and it does not work for GD32V. But I have a workaround. The people from PlatformIO have built the version 0.10 for Windows, but it is not available on the internet to download. But we get it when we install PlatformIO on VSCode on Windows. I did that. I found the `tool-dfuutil\bin` folder in `c:\Users\Luciano\.platformio\packages\tool-dfuutil\bin`.  
-Here you can download the bin folder here:  
+Here you can download the bin folder:  
 <https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/tool-dfuutil/bin.zip>
 
 Now we can empty the `tool-dfuutil/bin` folder on WSL2, because it will never work in Linux in WSL2.  
-If you use a windows tool (I use Total Commander) it is: `\\wsl$\Debian\home\luciano\.platformio\packages\tool-dfuutil\bin\`.  
-If you use a Linux tool it is: `~/.platformio/packages/tool-dfuutil/bin$`.  
+If you use a windows tool (I use Total Commander) the path is:  
+`\\wsl$\Debian\home\luciano\.platformio\packages\tool-dfuutil\bin`.  
+If you use a Linux tool the path is: `~/.platformio/packages/tool-dfuutil/bin`.  
 
 ![tool-dfuutil_1.png](images/tool-dfuutil_1.png "tool-dfuutil_1.png")  
 Just delete all 4 files. We will not need them, never.  
@@ -180,11 +181,11 @@ monitor_speed = 115200
 upload_protocol = dfu
 ```
 
-Time to build! On the bottom status bar find and click on this:  
+Time to build! On the bottom status bar find and click on this (PlatformIO: Build):  
 ![blink_3.png](images/blink_3.png "blink_3.png")  
 Build successful:  
 ![blink_4.png](images/blink_4.png "blink_4.png")  
-Time to download our app to the board. Put your Nano in "dfu mode" (remember BOOT0 and RESET buttons). In the bottom status bar find and click on this:  
+Time to download our app to the board. Put your Nano in "dfu mode" (remember BOOT0 and RESET buttons). In the bottom status bar find and click on this (PlatformIO: Upload):  
 ![blink_5.png](images/blink_5.png "blink_5.png")  
 Download successful:  
 ![blink_6.png](images/blink_6.png "blink_6.png")  
@@ -207,17 +208,23 @@ $ python3 -V
 ```
 
 The new project will be next to our other rust projects:  
-`cd ~/rustprojects/`  
+`$ cd ~/rustprojects/`  
 The magic incantation will create a scaffold for our first project:  
 `$ cargo pio new -b sipeed-longan-nano blinky_blue`  
-First error:  
+And we are surprised with an error:  
+
+```error
 Error: Configured board 'sipeed-longan-nano' matches multiple boards in PIO: [sipeed-longan-nano, sipeed-longan-nano]  
+```
+
 We need a workaround, let's use another board ID:  
 `$ cargo pio new -b gd32vf103c_longan_nano -t riscv32imac-unknown-none-elf blinky_blue`  
 ![pio_3.png](images/pio_3.png "pio_3.png")  
 
 Open VSCode in Windows, change it to WSL-Debian mode (left bottom green box), click on New WSL Window, click Open Folder and find  
 `~/rustprojects/blinky_blue/`  
+or equivalent, but with your username  
+`/home/luciano/rustprojects/blinky_blue/`  
 and click OK.  
 
 We need to change the `[env]` section of platform.ini:
