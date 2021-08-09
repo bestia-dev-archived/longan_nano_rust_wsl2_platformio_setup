@@ -1,0 +1,54 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "/home/luciano/rustprojects/longan_nano_rust_wsl2_platformio_setup/include",
+                "/home/luciano/rustprojects/longan_nano_rust_wsl2_platformio_setup/src",
+                "/home/luciano/.platformio/packages/framework-nuclei-sdk/NMSIS/Include",
+                "/home/luciano/.platformio/packages/framework-nuclei-sdk/NMSIS/Core/Include",
+                "/home/luciano/.platformio/packages/framework-nuclei-sdk/NMSIS/DSP/Include",
+                "/home/luciano/.platformio/packages/framework-nuclei-sdk/NMSIS/NN/Include",
+                "/home/luciano/.platformio/packages/framework-nuclei-sdk/SoC/gd32vf103/Common/Include",
+                "/home/luciano/.platformio/packages/framework-nuclei-sdk/SoC/gd32vf103/Board/gd32vf103c_longan_nano/Include",
+                "/home/luciano/.platformio/packages/framework-nuclei-sdk/SoC/gd32vf103/Common/Include/Usb",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/luciano/rustprojects/longan_nano_rust_wsl2_platformio_setup/include",
+                    "/home/luciano/rustprojects/longan_nano_rust_wsl2_platformio_setup/src",
+                    "/home/luciano/.platformio/packages/framework-nuclei-sdk/NMSIS/Include",
+                    "/home/luciano/.platformio/packages/framework-nuclei-sdk/NMSIS/Core/Include",
+                    "/home/luciano/.platformio/packages/framework-nuclei-sdk/NMSIS/DSP/Include",
+                    "/home/luciano/.platformio/packages/framework-nuclei-sdk/NMSIS/NN/Include",
+                    "/home/luciano/.platformio/packages/framework-nuclei-sdk/SoC/gd32vf103/Common/Include",
+                    "/home/luciano/.platformio/packages/framework-nuclei-sdk/SoC/gd32vf103/Board/gd32vf103c_longan_nano/Include",
+                    "/home/luciano/.platformio/packages/framework-nuclei-sdk/SoC/gd32vf103/Common/Include/Usb",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=50101",
+                "DOWNLOAD_MODE=DOWNLOAD_MODE_FLASHXIP",
+                "NO_RTOS_SERVICE",
+                "__PLATFORMIO_BUILD_DEBUG__",
+                ""
+            ],
+            "compilerPath": "/home/luciano/.platformio/packages/toolchain-riscv-gcc-nuclei/bin/riscv-nuclei-elf-gcc",
+            "compilerArgs": [
+                "-march=rv32imac",
+                "-mabi=ilp32",
+                "-mcmodel=medlow",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,6 @@
+[build]
+target = "riscv32imac-unknown-none-elf"
+
+[unstable]
+build-std = ["core", "panic_abort"]
+build-std-features = ["panic_immediate_abort"]
