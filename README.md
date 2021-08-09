@@ -241,7 +241,7 @@ riscv-rt = "0.8.0"
 longan-nano = "0.2.0"
 ```
 
-and most important we have to change the edition in  `[lib]` section from 2015 to 2018:  
+and most important we have to change the edition in  `[lib]` section from 2015 to 2018 else you get the cryptic error "error[E0433]: failed to resolve: maybe a missing crate longan_nano?":  
 
 ```toml
 [lib]
@@ -347,7 +347,7 @@ Now that the git and GitHub repositories are set, you can use VSCode icons (1) t
 
 You can find my repository here:
 <https://github.com/LucianoBestia/blinky_blue>  
-and clone it locally like this:  
+You can clone it locally like this:  
 
 ```bash
 cd ~/rustprojects
