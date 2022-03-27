@@ -1,8 +1,7 @@
 # longan_nano_rust_wsl2_platformio_setup
 
-*Luciano Bestia 2021-08-08*  
-
-How to setup a development environment for rust in Win10 + WSL2 + VSCode for Longan nano GD32 Risc-V development board  
+**How to setup a development environment for rust in Win10 + WSL2 + VSCode for Longan nano GD32 Risc-V development board**  
+***version: 1.0  date: 2021-08-08 author: [dev_Bestia](https://bestia.dev) repository: [GitHub](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup)***  
 
 ## Sipeed Longan nano
 
