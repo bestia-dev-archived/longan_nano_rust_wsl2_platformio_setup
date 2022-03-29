@@ -1,13 +1,13 @@
 # longan_nano_rust_wsl2_platformio_setup
 
 **How to setup a development environment for rust in Win10 + WSL2 + VSCode for Longan nano GD32 Risc-V development board**  
-***version: 1.0  date: 2021-08-08 author: [dev_Bestia](https://bestia.dev) repository: [GitHub](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup)***  
+***version: 1.0  date: 2021-08-08 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup)***  
 
 ## Sipeed Longan nano
 
 I just received my 2 [Sipeed Longan nano](http://longan.sipeed.com/en/) development boards ordered on [AliExpress](https://www.aliexpress.com/item/4000505297604.html?spm=a2g0s.9042311.0.0.6b4b4c4dYrInFR). They are cute and cheap. One has even a tiny lcd display.  
 The Risc-V chip on the board is GD32VF103CBT6 or in short [GD32V](https://www.gigadevice.com/products/microcontrollers/gd32/) from GigaDevice.
-![Longan nano](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/longan_nano_1.png "Longan nano")  
+![Longan nano](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/longan_nano_1.png "Longan nano")  
 I always wanted to play with a [Risc-V](https://riscv.org/about/) micro-processor. I think they are the future. I believe they will grow and will be used in phones, laptops and servers, not only in microcontrollers. But I hope designers will find a way to avoid [malware](https://en.wikipedia.org/wiki/Malware) inside the silicon. That would be a ruined future.  
 
 ## Rust on WSL
@@ -39,10 +39,10 @@ and these "WSL-Debian plugins":
 ## PlatformIO (PIO)
 
 [PlatformIO](https://marketplace.visualstudio.com/items?itemName=platformio.platformio-ide) is a plugin/extension for VSCode. It allows to build and download programs to the development board right inside VSCode. Install this extension in WSL-Debian.  
-![pio_2](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/pio_2.png "pio_2")  
+![pio_2](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/pio_2.png "pio_2")  
 Then install the platform gd32v for you Longan Nano board. Click on the extension icon (the alien face), then click on New Terminal and then type:  
 `platformio platform install gd32v`  
-![pio_1](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/pio_1.png "pio_1")  
+![pio_1](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/pio_1.png "pio_1")  
 
 ## DFU (Device Firmware Upgrade) driver
 
@@ -54,19 +54,19 @@ If you press and hold the `BOOT0` (right) button and then press shortly the `RES
 )". Now the Longan nano is communicating with the computer over usb. This special mode is used to upgrade the firmware and it is a official USB standard. You will need to do this every time you want to upgrade the firmware and that is super often in development. Get comfortable with these super tiny buttons ;-)  
 
 In the moment Longan Nano enters the "DFU mode" Win10 will recognize a new USB device and usually make a sound. Open the Device Manager: click on Start and type *manage*, this will show the Device Manager in the results and then click on it. Or just type `devmgmt.msc` in the command prompt or PowerShell.  
-![device manager 1](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/device_manager_1.png "device_manager_1")  
+![device manager 1](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/device_manager_1.png "device_manager_1")  
 If the Device Manager is already opened, in the moment you activate the "dfu mode" on the board, Device Manager will refresh to show the new usb device. Leave the Device manager open, we will need it a lot the first time to setup the thing.  
-![device manager 2](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/device_manager_2.png "device_manager_2")  
+![device manager 2](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/device_manager_2.png "device_manager_2")  
 We can see a new "Unknown device" when the Nano is in "DFU mode". That is not good enough. We need a driver.  
 First we will install the original driver from Sipeed. Open the page  
 <http://dl.sipeed.com/LONGAN/Nano/Tools>  
 and click on `GD32_MCU_Dfu_Tool_V3.8.1.5784_1.rar` to download the 10MB drivers. Don't miss the captcha or `you are a robot` ;-)  
 Unzip the folders：GD32 MCU Dfu Drivers_v1.0.1.2316  
 Right click on `GD32 MCU Dfu Drivers_v1.0.1.2316\x64\GD32 MCU Dfu Drivers.exe` and run as administrator.  
-![driver_install_1](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/driver_install_1.png "driver_install_1")  
+![driver_install_1](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/driver_install_1.png "driver_install_1")  
 Click on Install and after successful installation click Cancel to close the window. Strange choice of words "Cancel", it should be "Close". Also in their [online instructions](https://longan.sipeed.com/en/) is really visible that the main effort was in Chinese and not in the English language. Some translations are pretty bad.  
 Now in Device Manager at the bottom in the section "Universal Serial Bus controllers" we see the new driver.  
-![device manager 3](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/device_manager_3.png "device_manager_3")  
+![device manager 3](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/device_manager_3.png "device_manager_3")  
 This would be enough if we wanted to use the application from Sipeed: `GD32 MCU Dfu Tool_v3.8.1.5784\GD32 MCU Dfu Tool.exe`. But we don't want to do that. It is a windows GUI application, and we want to use a CLI application that can be a part of our workflow for building and downloading to the Longan Nano.  
 `Interesting:` the word "download" is used to send the firmware from the computer to the board and the word "upload" is used to send the firmware from the board to the computer. For me it sounds confusing, but this is the professional lingo!  
 
@@ -83,44 +83,44 @@ We need a special type of driver called [WinUSB](https://en.wikipedia.org/wiki/W
 Put your Longan Nona in "dfu mode". You know: BOOT0 and RESET buttons.  
 Double click on `zadig-2.5.exe` to run it. You will be asked `Do you want to allow this app to make changes to your device?` and choose Yes. It is a driver, it must change something.  
 From the menu choose Options - List All Devices.  
-![zadig_1](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_1.png "zadig_1")  
+![zadig_1](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_1.png "zadig_1")  
 When you open the DropDown there is bunch of existing usb drivers.  
-![zadig_2](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_2.png "zadig_2")  
+![zadig_2](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_2.png "zadig_2")  
 Interestingly, there is one driver without a name. I don't know why, but this is our GD32 driver. Click on it.  
 I want to give this driver a name. Click on the checkbox Edit,  
-![zadig_3](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_3.png "zadig_3")  
+![zadig_3](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_3.png "zadig_3")  
 write the driver name "WinUSB Longan Nano"  
-![zadig_4](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_4.png "zadig_4")  
+![zadig_4](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_4.png "zadig_4")  
 and click again on the Edit checkbox.  
-![zadig_5](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_5.png "zadig_5")  
+![zadig_5](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_5.png "zadig_5")  
 Now the driver has a name. I hope.  
 And now the magic part. Click on `Replace Driver`.  
-![zadig_6](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_6.png "zadig_6")  
+![zadig_6](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_6.png "zadig_6")  
 Say Yes.  
-![zadig_8](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_8.png "zadig_8")  
+![zadig_8](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_8.png "zadig_8")  
 Be patient.  
-![zadig_9](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_9.png "zadig_9")  
+![zadig_9](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/zadig_9.png "zadig_9")  
 Done! Close it.  
 
 Open Device Manager and put the Nano in "dfu mode" again. The new situation has a new "Universal Serial Bus devices", but sadly it is called Unknown device.  
-![device manager 4](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/device_manager_4.png "device_manager_4")  
+![device manager 4](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/device_manager_4.png "device_manager_4")  
 Double click on it and choose the tab Details and you will see that it is really our new driver "WinUSB Longan Nano".  
-![device manager 5](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/device_manager_5.png "device_manager_5")  
+![device manager 5](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/device_manager_5.png "device_manager_5")  
 
 The dfu-util for Windows you can download on the internet is version 0.9. Sadly it has a bug and it does not work for GD32V. But I have a workaround. The people from PlatformIO have built the version 0.10 for Windows, but it is not available on the internet to download. But we get it when we install PlatformIO on VSCode on Windows. I did that. I found the `tool-dfuutil\bin` folder in `c:\Users\Luciano\.platformio\packages\tool-dfuutil\bin`.  
 Here you can download the bin folder:  
-<https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/tool-dfuutil/bin.zip>
+<https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/tool-dfuutil/bin.zip>
 
 Now we can empty the `tool-dfuutil/bin` folder on WSL2, because it will never work in Linux in WSL2.  
 If you use a windows tool (I use Total Commander) the path is:  
 `\\wsl$\Debian\home\luciano\.platformio\packages\tool-dfuutil\bin`.  
 If you use a Linux tool the path is: `~/.platformio/packages/tool-dfuutil/bin`.  
 
-![tool-dfuutil_1.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/tool-dfuutil_1.png "tool-dfuutil_1.png")  
+![tool-dfuutil_1.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/tool-dfuutil_1.png "tool-dfuutil_1.png")  
 Just delete all 4 files. We will not need them, never.  
 
 Now copy the content of the zip file to that folder. It sounds strange to have Windows exe files inside a linux folder, but trust me. It will work on WSL2 because of a magic collaboration between Windows and WSL2.  
-![tool-dfuutil_2.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/tool-dfuutil_2.png "tool-dfuutil_2.png")  
+![tool-dfuutil_2.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/tool-dfuutil_2.png "tool-dfuutil_2.png")  
 The Linux PlatformIO cannot directly call the windows exe files because they have the extension `.exe`.  
 But we can create [symlinks](https://en.wikipedia.org/wiki/Symbolic_link), so it will look to PlatformIO as nothing has changed. Run this in Linux bash:  
 
@@ -144,29 +144,29 @@ Et voilà ! There we are !
 
 Let's try our environment now.  
 Open VSCode. Normally it opens in Windows Mode. You can tell by the green box in the left bottom corner. This is how it looks for Windows mode:  
-![vscode_1.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_1.png "vscode_1.png")  
+![vscode_1.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_1.png "vscode_1.png")  
 and this is how it looks in WSL-Debian mode:  
-![vscode_2.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_2.png "vscode_2.png")  
+![vscode_2.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_2.png "vscode_2.png")  
 If you click on this green box it opens some new commands:  
-![vscode_3.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_3.png "vscode_3.png")  
+![vscode_3.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_3.png "vscode_3.png")  
 Click on `New WSL Window` and now your VSCode is in WSL-Debian mode.  
 Click on the icon for PlatformIO and then Open and then `Project Examples`.  
-![vscode_4.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_4.png "vscode_4.png")  
+![vscode_4.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_4.png "vscode_4.png")  
 Select an example  
-![vscode_5.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_5.png "vscode_5.png")  
+![vscode_5.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_5.png "vscode_5.png")  
 Choose Arduino blink  
-![vscode_6.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_6.png "vscode_6.png")  
+![vscode_6.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_6.png "vscode_6.png")  
 Click Import  
-![vscode_7.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_7.png "vscode_7.png")  
+![vscode_7.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_7.png "vscode_7.png")  
 The folder of the imported projects shows:  
-![vscode_8.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_8.png "vscode_8.png")  
+![vscode_8.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_8.png "vscode_8.png")  
 Now we can open this project folder:  
-![vscode_9.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_9.png "vscode_9.png")  
+![vscode_9.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/vscode_9.png "vscode_9.png")  
 Observe that we are working in the Linux file system :  
-![blink_1.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_1.png "blink_1.png")  
+![blink_1.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_1.png "blink_1.png")  
 If it asks you to trust the author, answer Yes.  
 This is our project now:  
-![blink_2.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_2.png "blink_2.png")  
+![blink_2.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_2.png "blink_2.png")  
 We have to make some changes to the `platformio.ini` to look like this:  
 
 ```ini
@@ -181,13 +181,13 @@ upload_protocol = dfu
 ```
 
 Time to build! On the bottom status bar find and click on this (PlatformIO: Build):  
-![blink_3.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_3.png "blink_3.png")  
+![blink_3.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_3.png "blink_3.png")  
 Build successful:  
-![blink_4.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_4.png "blink_4.png")  
+![blink_4.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_4.png "blink_4.png")  
 Time to download our app to the board. Put your Nano in "dfu mode" (remember BOOT0 and RESET buttons). In the bottom status bar find and click on this (PlatformIO: Upload):  
-![blink_5.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_5.png "blink_5.png")  
+![blink_5.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_5.png "blink_5.png")  
 Download successful:  
-![blink_6.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_6.png "blink_6.png")  
+![blink_6.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/blink_6.png "blink_6.png")  
 Observe your Longan Nano how the LED blinks red.  
 It's alive !  
 
@@ -210,7 +210,7 @@ The new project will be next to our other rust projects:
 `$ cd ~/rustprojects/`  
 The magic incantation will create a scaffold for our first project `blinky_blue`:  
 `$  cargo pio new -b sipeed-longan-nano -p gd32v blinky_blue`  
-![pio_3.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/pio_3.png "pio_3.png")  
+![pio_3.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/pio_3.png "pio_3.png")  
 
 Open VSCode in Windows, change it to WSL-Debian mode (left bottom green box), click on New WSL Window, click Open Folder and find  
 `~/rustprojects/blinky_blue/`  
@@ -305,11 +305,11 @@ extern "C" fn main() -> i32 {
 
 Good.  
 Now we can click on `PlatformIO: Build` button in the status bar.  
-![build_1.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/build_1.png "build_1.png")  
+![build_1.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/build_1.png "build_1.png")  
 And we have a successful build.  
 
 Put the Longan Nano in `DFU mode` (BOOT0 and RESET mini-buttons) and click on `PlatformIO: Upload` button on the statusbar.  
-![build_2.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/build_2.png "build_2.png")  
+![build_2.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/build_2.png "build_2.png")  
 It works! The Nano has a blinking blue LED !  
 Congratulations !
 You were very patient if you come to this line. The setup of the environment is not super smooth, but once you got it, it's done. You don't have to repeat it.  
@@ -339,17 +339,17 @@ Open in your browser <https://github.com>, login and there will be a big green `
 
 The remote repository is created and instructions are shown:
 
-![github_1](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/github_1.png "github_1")  
+![github_1](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/github_1.png "github_1")  
 
 Click on the button to copy the commands. Open the Debian bash terminal inside VSCode (Ctrl+j) and paste the commands.  
 Now that the git and GitHub repositories are set, you can use VSCode icons (1) to commit (2+3) and push (4) to remote:  
-![git_vscode_1.png](https://github.com/LucianoBestia/longan_nano_rust_wsl2_platformio_setup/raw/main/images/git_vscode_1.png "git_vscode_1.png")  
+![git_vscode_1.png](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup/raw/main/images/git_vscode_1.png "git_vscode_1.png")  
 
 You can find my repository here:
-<https://github.com/LucianoBestia/blinky_blue>  
+<https://github.com/bestia-dev/blinky_blue>  
 You can clone it locally like this:  
 
 ```bash
 cd ~/rustprojects
-git clone git@github.com:LucianoBestia/blinky_blue.git
+git clone git@github.com:bestia-dev/blinky_blue.git
 ```
