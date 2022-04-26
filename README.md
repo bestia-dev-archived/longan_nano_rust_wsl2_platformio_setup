@@ -5,6 +5,8 @@
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fbestia-dev%2Flongan_nano_rust_wsl2_platformio_setup&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
+Hashtags: #rustlang #riscv #embeddeddevelopment
+
 ## Sipeed Longan nano
 
 I just received my 2 [Sipeed Longan nano](http://longan.sipeed.com/en/) development boards ordered on [AliExpress](https://www.aliexpress.com/item/4000505297604.html?spm=a2g0s.9042311.0.0.6b4b4c4dYrInFR). They are cute and cheap. One has even a tiny lcd display.  

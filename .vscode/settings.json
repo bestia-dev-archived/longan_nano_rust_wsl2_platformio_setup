@@ -1,23 +1,25 @@
 {
     "cSpell.words": [
-        "GPIOC",
-        "Giga",
-        "Zadig",
+        "bestia-dev",
         "blinky",
         "devmgmt",
         "dfuutil",
         "distro",
+        "embeddeddevelopment",
+        "Giga",
         "gpioa",
+        "GPIOC",
         "imac",
         "leds",
-        "bestia-dev",
         "microcontrollers",
         "platformio",
         "proto",
         "riscv",
+        "rustlang",
         "sipeed",
         "symlinks",
         "sysclk",
-        "tlsv"
+        "tlsv",
+        "Zadig"
     ]
 }
