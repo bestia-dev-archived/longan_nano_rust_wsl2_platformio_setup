@@ -3,6 +3,9 @@
 **How to setup a development environment for rust in Win10 + WSL2 + VSCode for Longan nano GD32 Risc-V development board**  
 ***version: 1.0  date: 2021-08-08 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/longan_nano_rust_wsl2_platformio_setup)***  
 
+![status](https://img.shields.io/badge/obsolete-red) 
+![status](https://img.shields.io/badge/archived-red) 
+![status](https://img.shields.io/badge/tutorial-yellow) 
 ![Hits](https://bestia.dev/webpage_hit_counter/get_svg_image/88325836.svg)
 
 Hashtags: #rustlang #riscv #embeddeddevelopment
